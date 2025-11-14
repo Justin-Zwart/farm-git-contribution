@@ -1,0 +1,5 @@
+[build]
+builder = "python"
+
+[deploy]
+startCommand = "python run.py"
