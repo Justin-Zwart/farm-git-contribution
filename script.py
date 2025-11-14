@@ -30,25 +30,13 @@ for i in range(iterations):
     # Create a branch name
     branch_name = f"auto-blankline-{datetime.now().strftime('%Y%m%d-%H%M%S')}-{i}"
     print("Creating branch:", branch_name)
-
-    # Checkout new branch
     subprocess.run(["git", "checkout", "-b", branch_name], check=True)
-
-    # Stage changes
     subprocess.run(["git", "add", "."], check=True)
-
-    # Commit
     subprocess.run(["git", "commit", "-m", f"Iteration {i+1}: appended blank lines"], check=True)
-
-    # Push branch
     subprocess.run(["git", "push", "--set-upstream", "origin", branch_name], check=True)
-
-    # Merge into main
     subprocess.run(["git", "checkout", "main"], check=True)
     subprocess.run(["git", "pull"], check=True)
     subprocess.run(["git", "merge", branch_name], check=True)
-
-    # Push merge to main
     subprocess.run(["git", "push"], check=True)
 
     print(f"Sleeping 10 seconds...")
